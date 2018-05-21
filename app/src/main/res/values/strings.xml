@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">ShopMobile</string>
+    
+    <!-- login -->
+    <string name="user">UserName</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="msg_error">Los campos son obligatorios</string>
+
+    <!-- Profile -->
+    <string name="hint_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_identification">Identification</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="cell">Cell</string>
+
+    
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_employee">EmployeeActivity</string>
+    <string name="title_activity_costomer">CostomerActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_reports">ReportsActivity</string>
+    <string name="title_activity_sale">SaleActivity</string>
+</resources>
