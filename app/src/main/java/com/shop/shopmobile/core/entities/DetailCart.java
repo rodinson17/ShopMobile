@@ -7,17 +7,17 @@ public class DetailCart extends RealmObject {
 
     @PrimaryKey
     private int idDetailCart;
-    private int idCart;
-    private int idProduct;
+    private Cart cart;
+    private Product product;
     private int quantity;
     private int price;
 
     public DetailCart() { }
 
-    public DetailCart(int idDetailCart, int idCart, int idProduct, int quantity, int price) {
+    public DetailCart(int idDetailCart, Cart cart, Product product, int quantity, int price) {
         this.idDetailCart = idDetailCart;
-        this.idCart = idCart;
-        this.idProduct = idProduct;
+        this.cart = cart;
+        this.product = product;
         this.quantity = quantity;
         this.price = price;
     }
@@ -30,20 +30,20 @@ public class DetailCart extends RealmObject {
         this.idDetailCart = idDetailCart;
     }
 
-    public int getidCart() {
-        return idCart;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setidCart(int idCart) {
-        this.idCart = idCart;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
-    public int getIdProduct() {
-        return idProduct;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {

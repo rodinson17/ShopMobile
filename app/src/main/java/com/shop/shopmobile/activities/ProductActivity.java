@@ -17,18 +17,21 @@ import com.shop.shopmobile.core.entities.Category;
 import com.shop.shopmobile.core.entities.Product;
 import com.shop.shopmobile.dialogs.DialogProduct;
 import com.shop.shopmobile.utilities.GeneralApp;
-import com.shop.shopmobile.utilities.SimpleRecyclerViewAdapter;
-import com.shop.shopmobile.utilities.SimpleViewHolder;
-import java.util.ArrayList;
+import com.shop.shopmobile.adapters.SimpleRecyclerViewAdapter;
+import com.shop.shopmobile.adapters.SimpleViewHolder;
+
 import java.util.List;
 
-public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAdapter.Listener<Product> {
+public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAdapter.Listener<Product>, DialogProduct.DialogProductListener {
 
     @In(R.id.rv_product)
     private RecyclerView rvProduct;
 
     @In(R.id.fab_add_product)
     private FloatingActionButton fabAddProduct;
+
+    @In(R.id.tb_product)
+    private Toolbar toolbar;
 
     private SimpleRecyclerViewAdapter<Product, MyProductViewHolder> adapter;
     private List<Product> listProduct;
@@ -44,7 +47,6 @@ public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAda
         String nameCategory = getIntent().getStringExtra("category");
         category = AppClientRealm.getDataForID(Category.class, "idCategory", idCategory);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_product);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Productos");
         getSupportActionBar().setSubtitle(nameCategory);
@@ -52,8 +54,7 @@ public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAda
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        toolbar.setOnClickListener(view -> { onBackPressed(); });
-
+        toolbar.setNavigationOnClickListener(view -> { onBackPressed(); });
         fabAddProduct.setOnClickListener(this::addProductOnClick);
 
         setProductInView();
@@ -61,8 +62,6 @@ public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAda
 
     public void setProductInView() {
         listProduct = AppClientRealm.getAllDataForID(Product.class, "category.idCategory", idCategory);
-
-        System.out.println("list: "+listProduct.size());
 
         rvProduct.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
         rvProduct.setHasFixedSize(true);
@@ -74,21 +73,17 @@ public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAda
 
 
     public void addProductOnClick(View v) {
-        int idProduct = 1;
 
-        if (!listProduct.isEmpty()) {
-            Number maxID = AppClientRealm.getMaxID(Product.class, "IdProduct");
-            long newID = (maxID != null) ? ((long) maxID + 1) : 0;
-
-            idProduct = (int) newID;
-        }
-        System.out.println("idProduct: "+idProduct);
+        Number maxID = AppClientRealm.getMaxID(Product.class, "idProduct");
+        long newID = (maxID != null) ? ((long) maxID + 1) : 1;
+        int idProduct = (int) newID;
+        System.out.println("id: "+idProduct);
 
         Product newProduct = new Product();
         newProduct.setIdProduct(idProduct);
         newProduct.setCategory(category);
-        System.out.println("aggregar product");
         DialogProduct dialogProduct = new DialogProduct(this, newProduct);
+        dialogProduct.setListener(this);
         dialogProduct.show();
     }
 
@@ -96,6 +91,7 @@ public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAda
     public void simpleRecyclerViewOnCLick(Product product) {
         System.out.println("product: "+product.getNameProduct());
         DialogProduct dialogProduct = new DialogProduct(this, product);
+        dialogProduct.setListener(this);
         dialogProduct.show();
     }
 
@@ -104,6 +100,14 @@ public class ProductActivity extends GeneralApp implements SimpleRecyclerViewAda
         super.onResume();
         System.out.println("retorno de dialog");
         //setProductInView();
+    }
+
+    @Override
+    public void onClickAction(DialogProduct dialog) {
+        listProduct = AppClientRealm.getAllDataForID(Product.class, "category.idCategory", idCategory);
+        System.out.println("list "+listProduct.size()+" idcat:: "+idCategory);
+        adapter.notifyDataSetChanged();
+        dialog.dismiss();
     }
 
     public class MyProductViewHolder extends SimpleViewHolder<Product> {

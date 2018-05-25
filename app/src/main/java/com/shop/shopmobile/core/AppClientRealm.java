@@ -171,9 +171,28 @@ RealmResults<Person> r2 = realm.where(Person.class)
 //    String json = "{ name : 'John', email : 'john@corporation.com' }";
 //    UserExample user = gson.fromJson(json, UserExample.class);
 
-
+/*
+* Re*/
 
     // region remove
+    public static  <T extends RealmObject> boolean  removeObjectForId(Class<T> clazz, String field, int id) {
+        realm.beginTransaction();
+        //RealmResults<T> list = realm.where(clazz).equalTo(field, id).findAll();
+        //list.deleteAllFromRealm();
+        T obj = realm.where(clazz).equalTo(field, id).findFirst();
+        obj.deleteFromRealm();
+        realm.commitTransaction();
+        return true;
+    }
+
+    public static  <T extends RealmObject> boolean  removeListObjectForId(Class<T> clazz, String field, int id) {
+        realm.beginTransaction();
+        RealmResults<T> list = realm.where(clazz).equalTo(field, id).findAll();
+        list.deleteAllFromRealm();
+        realm.commitTransaction();
+        return true;
+    }
+
 
     // endregion
 

@@ -3,8 +3,6 @@ package com.shop.shopmobile.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,8 +11,8 @@ import com.shop.shopmobile.R;
 import com.shop.shopmobile.annotation.In;
 import com.shop.shopmobile.core.entities.Person;
 import com.shop.shopmobile.utilities.GeneralApp;
-import com.shop.shopmobile.utilities.SimpleRecyclerViewAdapter;
-import com.shop.shopmobile.utilities.SimpleViewHolder;
+import com.shop.shopmobile.adapters.SimpleRecyclerViewAdapter;
+import com.shop.shopmobile.adapters.SimpleViewHolder;
 
 import java.util.List;
 

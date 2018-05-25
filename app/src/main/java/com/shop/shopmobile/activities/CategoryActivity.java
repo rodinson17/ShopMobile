@@ -24,8 +24,8 @@ import com.shop.shopmobile.core.entities.Category;
 import com.shop.shopmobile.utilities.Constant;
 import com.shop.shopmobile.utilities.GeneralApp;
 import com.shop.shopmobile.utilities.MyTextWatcher;
-import com.shop.shopmobile.utilities.SimpleRecyclerViewAdapter;
-import com.shop.shopmobile.utilities.SimpleViewHolder;
+import com.shop.shopmobile.adapters.SimpleRecyclerViewAdapter;
+import com.shop.shopmobile.adapters.SimpleViewHolder;
 import java.util.List;
 
 public class CategoryActivity extends GeneralApp implements SimpleRecyclerViewAdapter.Listener<Category> {
@@ -46,7 +46,7 @@ public class CategoryActivity extends GeneralApp implements SimpleRecyclerViewAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_category);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("Categorias");

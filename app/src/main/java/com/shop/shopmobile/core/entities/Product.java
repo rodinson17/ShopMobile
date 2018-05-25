@@ -6,7 +6,7 @@ import io.realm.annotations.PrimaryKey;
 public class Product extends RealmObject {
 
     @PrimaryKey
-    private int IdProduct;
+    private int idProduct;
     private String code;
     private String nameProduct;
     private String description;
@@ -16,11 +16,10 @@ public class Product extends RealmObject {
     private boolean available;
     private Category category;
 
-
     public Product() { }
 
     public Product(int idProduct, String code, String nameProduct, String description, int priceProduct, int imageProduct, int quantity, boolean available, Category category) {
-        IdProduct = idProduct;
+        this.idProduct = idProduct;
         this.code = code;
         this.nameProduct = nameProduct;
         this.description = description;
@@ -34,7 +33,7 @@ public class Product extends RealmObject {
     @Override
     public String toString() {
         return "Product{" +
-                "IdProduct=" + IdProduct +
+                "idProduct=" + idProduct +
                 ", code='" + code + '\'' +
                 ", nameProduct='" + nameProduct + '\'' +
                 ", description='" + description + '\'' +
@@ -47,11 +46,11 @@ public class Product extends RealmObject {
     }
 
     public int getIdProduct() {
-        return IdProduct;
+        return idProduct;
     }
 
     public void setIdProduct(int idProduct) {
-        IdProduct = idProduct;
+        this.idProduct = idProduct;
     }
 
     public String getCode() {
@@ -117,4 +116,5 @@ public class Product extends RealmObject {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }
